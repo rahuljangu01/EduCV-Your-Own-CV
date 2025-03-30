@@ -7,6 +7,9 @@
     --transition: all 0.3s ease-in-out;
 }
 
+html {
+    scroll-behavior: smooth;
+}
 
 * {
     margin: 0;
@@ -14,6 +17,23 @@
     box-sizing: border-box;
     font-family: 'Segoe UI', sans-serif;
 }
+
+/* Container Layout */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* Flexbox Layout for Sections */
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+}
+
 
 
 body {
@@ -24,19 +44,25 @@ body {
     margin: 0;
     padding: 0;
 }
+.logo {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+}
 
-
-.logo img{
-    width: 130px;
-    height: auto;
-    display: block;
+.logo-img {
+    width: 40px; /* Adjust size as needed */
+    height: 40px;
+    margin-right: 10px; /* Space between logo and text */
 }
 
 
 
 /* Header Styling */
 header {
-    background: #d0ba55;
+    background: #020f51;
     padding: 0.1rem 5%;
     position: fixed;
     width: 100%;
@@ -51,7 +77,44 @@ header {
 .logo {
     font-size: 2rem;
     font-weight: bold;
-    color: var(--primary-color);
+    color: #e827b1
+}
+
+/* Default Styles for Desktop */
+.menu-toggle {
+    display: none; /* Hidden on larger screens */
+    font-size: 30px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+/* Mobile Navigation */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background: navy;
+        text-align: center;
+        padding: 10px 0;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links li {
+        padding: 10px 0;
+    }
+
+    .menu-toggle {
+        display: block; /* Only visible on mobile */
+    }
 }
 
 /* Navigation Styling */
@@ -134,7 +197,7 @@ header {
     padding: 10px;
     color: var(--light-text);
     transition: all 0.3s ease-in-out;
-}
+}   
 
 .dropdown a:hover {
     background: var(--secondary-color);
@@ -182,7 +245,65 @@ header {
     padding-bottom: 0;
 }
 
+/* Button Animations */
+.button {
+    display: inline-block;
+    background: #007BFF;
+    color: white;
+    padding: 12px 18px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out, background 0.3s ease-in-out;
+}
 
+.button:hover {
+    background: #0056b3;
+    transform: scale(1.05);
+}
+
+/* Section Fade-in Animation */
+.section {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.section.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* Input Focus Effect */
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: box-shadow 0.3s ease-in-out, border 0.3s ease-in-out;
+}
+
+input:focus, textarea:focus {
+    border-color: #007BFF;
+    box-shadow: 0px 0px 10px rgba(0, 123, 255, 0.5);
+    outline: none;
+}
+
+/* Footer Smooth Appearance */
+.footer {
+    text-align: center;
+    padding: 15px;
+    background: navy;
+    color: white;
+    transition: background 0.5s ease-in-out;
+}
+
+.footer:hover {
+    background: #0056b3;
+}
 
 
 /* Home Section */
@@ -193,7 +314,7 @@ header {
     justify-content: center;
     align-items: center;
     text-align: center;
-    background: linear-gradient(135deg, #00416A, #E4E5E6); /* Modern gradient */
+    background: linear-gradient(135deg, #0d1b2a, #1b263b);
     color: white;
     padding: 20px;
 }
@@ -213,32 +334,80 @@ header {
 .home p {
     font-size: 1.2em;
     margin-top: 10px;
+    padding: 10px;
+    margin: 20px;
 }
 
 
+.home-card {
+    
+}
 
+.cta-button {
+    background: #ffcc00;
+    color: black;
+    font-size: 18px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.cta-button:hover {
+    background: #ff9900;
+}
 
 /* Features Section */
 .features {
+    background: linear-gradient(135deg, #0d1b2a, #1b263b);
     scroll-margin-top: 80px;
     text-align: center;
-    margin: 50px auto;
-    max-width: 1200px;
+    max-height: 1000px;
+    max-width: 100%;
 }
 
 /* Center the "OUR FEATURES" header */
-.features-header {
+/* .features-header {
+    color: #f8f9fa;
     text-align: center;
     font-size: 2rem;
     font-weight: bold;
-    margin-bottom: 30px; /* Adds space between heading and boxes */
+    margin-bottom: 30px; /* Adds space between heading and boxes 
+} */
+
+.features-header h2 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    color: #f8f9fa;
+    text-transform: uppercase;
+    position: relative;
+    white-space: nowrap;
+}
+
+.features-header h2 span {
+    background: linear-gradient(45deg, #ff9a8b, #ff6a88, #ff99ac);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+}
+
+/* Neon Underline Animation */
+.features-header h2::after {
+    content: "";
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #ff6a88, #ff9a8b);
+    display: block;
+    margin: 8px auto 0;
+    animation: underline-move 1.5s infinite alternate ease-in-out;
 }
 
 /* Align feature boxes in a row */
 .features-card {
     display: inline-block;
     width: 30%; /* Each box takes 30% width */
-    margin: 10px; /* Adds space between the boxes */
+    margin: 40px; /* Adds space between the boxes */
     padding: 20px;
     border-radius: 10px;
     box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.15);
@@ -571,14 +740,42 @@ header {
 /* Contact Section */
 .contact-us {
     padding: 5rem 2rem;
-    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    background: linear-gradient(135deg, #0d1b2a, #1b263b);
     text-align: center;
     color: var(--light-text);
 }
 
-.contact-us h2 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
+
+.contact-header h2 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    color: #f8f9fa;
+    text-transform: uppercase;
+    position: relative;
+    white-space: nowrap;
+}
+
+.contact-header h2 span {
+    background: linear-gradient(45deg, #ff9a8b, #ff6a88, #ff99ac);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+}
+
+/* Neon Underline Animation */
+.contact-header h2::after {
+    content: "";
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #ff6a88, #ff9a8b);
+    display: block;
+    margin: 8px auto 0;
+    animation: underline-move 1.5s infinite alternate ease-in-out;
+}
+
+@keyframes underline-move {
+    from { width: 60px; }
+    to { width: 150px; }
 }
 
 .contact-form {
@@ -608,7 +805,7 @@ header {
     opacity: 1; /* Ensures full visibility */
 }
 
-.contact-form button {
+.contact-form button {  
     padding: 1rem 2rem;
     background: var(--accent-color);
     border: none;
@@ -680,4 +877,224 @@ header {
         flex-direction: column;
         gap: 1rem;
     }
+}
+
+/* Chatbot Toggle Button */
+#chat-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: navy;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Chatbox Container */
+#chat-container {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 320px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    display: none; /* Hidden initially */
+}
+
+/* Chat Header */
+#chat-header {
+    background: navy;
+    color: white;
+    padding: 10px;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#close-chat {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* Chatbot Toggle Button */
+#chat-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: navy;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Chatbox Container */
+#chat-container {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 350px;
+    max-width: 90%;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    display: none; /* Hidden initially */
+    flex-direction: column;
+}
+
+/* Chat Header */
+#chat-header {
+    background: navy;
+    color: white;
+    padding: 10px;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#close-chat {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* Chat Messages */
+#chat-messages {
+    height: 300px;
+    overflow-y: auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+}
+
+/* Chat Input Section */
+#chat-input-container {
+    display: flex;
+    border-top: 1px solid #ddd;
+    align-items: center;
+    padding: 5px;
+    background: #f9f9f9;
+}
+
+/* Input Field */
+#chat-input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+/* Send Button */
+#send-btn {
+    background: navy;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-left: 5px;
+}
+
+/* Chat Bubbles */
+.user-message, .bot-message {
+    max-width: 80%;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 5px 0;
+}
+
+.user-message {
+    background: #007bff;
+    color: white;
+    align-self: flex-end;
+}
+
+.bot-message {
+    background: #f1f1f1;
+    color: black;
+    align-self: flex-start;
+}
+
+/* Responsive Design */
+@media (max-width: 500px) {
+    #chat-container {
+        width: 90%;
+        right: 5%;
+        bottom: 70px;
+    }
+}
+
+
+/* Video Section Styling */
+.promo-video {
+    text-align: center;
+    padding: 50px 20px;
+    background: linear-gradient(135deg, #0d1b2a, #1b263b);
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.promo-video video {
+    border-radius: 12px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+    max-width: 100%;
+    height: auto;
+    transition: transform 0.3s ease-in-out;
+}
+.promo-video video:hover {
+    transform: scale(1.03);
+}
+.mute-button {
+    background: #ff4444;
+    border: none;
+    padding: 14px 18px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    color: white;
+    transition: all 0.3s ease-in-out;
+    display: inline-block;
+    margin-top: 15px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+.mute-button:hover {
+    background: #ff2222;
+    transform: scale(1.1);
+}
+.mute-button:active {
+    background: #cc0000;
+    transform: scale(0.9);
 }
