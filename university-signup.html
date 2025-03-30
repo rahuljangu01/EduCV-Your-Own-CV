@@ -3,22 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>University Sign Up</title>
+    <title>University Sign Up - EduCV</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <div class="login-container">
         <h2>University Sign Up</h2>
-        <form>
-            <input type="text" placeholder="University Name" required>
-            <input type="email" placeholder="University Email" required>
-            <input type="password" placeholder="Password" required>
-            <input type="password" placeholder="Confirm Password" required>
+        <form id="signupForm">
+            <input type="email" id="email" placeholder="Enter Email" required>
+            <input type="password" id="password" placeholder="Enter Password" required>
+            <input type="hidden" id="role" value="university"> <!-- Role fixed as student -->
             <button type="submit">Sign Up</button>
         </form>
         <p>Already have an account? <a href="university-login.html">Login</a></p>
     </div>
 
+    <script>
+        document.getElementById("signupForm").addEventListener("submit", async function (event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Get form data
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const role = document.getElementById("role").value; // Role is fixed as "student"
+
+            // Send signup request to the backend
+            try {
+                const response = await fetch("http://localhost:5000/signup", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ email, password, role }),
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Signup successful
+                    alert("Signup successful! Please login.");
+                    window.location.href = "university-login.html"; // Redirect to student login page
+                } else {
+                    // Signup failed
+                    alert(data.message || "Signup failed. Please try again.");
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert("An error occurred. Please try again.");
+            }
+        });
+    </script>
 </body>
 </html>
