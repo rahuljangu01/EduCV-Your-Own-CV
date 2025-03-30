@@ -10,27 +10,21 @@
         <title>EduCV-Your Own Resume</title>
     </head>
     <body>
-        <!-- <header>
-            <nav>
-                <div class="logo">EduCV</div>
-                <ul class="nav-links">
-                    <li><a href="#Home">Home</a></li>
-                    <li><a href="#Features">Features</a></li>
-                    <li><a href="#About">About</a></li>
-                    <li><a href="#Contact">Contact</a></li>
-                </ul>
-            </nav>
-        </header> -->
+       
 
         
      <!-- Header Section -->
      <header class="header">
-        <div class="logo">EduCV</div>
+        <div class="logo">
+            <img src="images/EDULOGO2.png" class="logo-img">
+            EduCV</div>
         <nav class="navbar">
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>  
             <ul class="nav-links">
                 <li><a href="#Home">Home</a></li>
                 <li><a href="#Features">Features</a></li>
                 <li><a href="#About">About</a></li>
+                <li><a href="#Promo">Promo Video</a></li>
                 <li><a href="#Contact">Contact</a></li>
             </ul>
             <div class="hamburger">
@@ -45,7 +39,7 @@
         <script>
             function toggleMenu() {
                 document.querySelector(".nav-links").classList.toggle("active");
-            }
+            }            
         </script>
         
         
@@ -53,20 +47,17 @@
   <!-- Home Section -->
   <section class="home" id="Home">
     <h1>Welcome to <span class="highlight">EduCV</span></h1>
-    <p>Create professional resumes, showcase your skills, and connect with recruiters.</p>
+    <p>EduCV is an platform that helps students create professional CVs, universities manage student profiles, and companies find top talent. It offers AI resume generation, document uploads, career insights, and job matching, bridging education and career success seamlessly</p>
+    <button class="cta-button" onclick="location.href='#Promo'">📽️ Watch Promo</button>
 </section>
 
 
-        
-
-        <!-- <section class="features" id="Features">
-            <div class="features-card">STUDENT</div>
-            <div class="features-card">UNIVERSITY/INSTITUTE</div>
-            <div class="features-card">COMPANY</div>
-        </section> -->
 
         <section class="features" id="Features">
-            <h2 class="features-header">OUR <span>FEATURES</span></h2>
+            <div class="features-header">
+                <h2>OUR <span>FEATURES</span></h2>
+            </div>
+            <!-- <h2 class="features-header">OUR <span>FEATURES</span></h2> -->
             <div class="features-card student">
                 <i class="bi bi-person"></i>
                 <h3>STUDENT</h3>
@@ -137,11 +128,42 @@
         </section>
     
         
-        
+       <!-- video Section -->
+       <section class="promo" id="Promo">
+        <div class="promo-video">
+            <video id="promo-video" width="80%" autoplay loop muted playsinline disablePictureInPicture controlslist="nodownload nofullscreen noremoteplayback">
+                <source src="video/promo-video.mp4" type="video/mp4">
+            </video>
+            <button class="mute-button" id="promo-mute-btn">🔇</button>
+        </div>
+    </section>
+
+<!-- JavaScript for Mute/Unmute -->
+<script>
+    const promoVideo = document.getElementById("promo-video");
+    const promoMuteBtn = document.getElementById("promo-mute-btn");
+
+    promoMuteBtn.addEventListener("click", () => {
+        if (promoVideo.muted) {
+            promoVideo.muted = false;
+            promoMuteBtn.textContent = "🔊";
+            promoMuteBtn.style.background = "#44cc44"; // Green when unmuted
+        } else {
+            promoVideo.muted = true;
+            promoMuteBtn.textContent = "🔇";
+            promoMuteBtn.style.background = "#ff4444"; // Red when muted
+        }
+    });
+</script>
+
+
         
 
         <section class="contact-us" id="Contact">
-            <h2>CONTACT US</h2>
+            <!-- <h2>CONTACT US</h2> -->
+             <div class="contact-header">
+                <h2>CONTACT <span>US</span></h2>
+             </div>
             <form class="contact-form">
                 <input type="text" placeholder="Your Name" required>
                 <input type="email" placeholder="Email" required>
@@ -155,6 +177,78 @@
                 <a href="mailto:your-email@example.com"><i class="bi bi-envelope"></i></a>
             </div>
         </section>
+
+      <!-- Chatbot Toggle Button -->
+<button id="chat-toggle">
+    <i class="bi bi-chat-dots"></i>
+</button>
+
+<!-- AI Chatbot -->
+<div id="chat-container" class="hidden">
+    <div id="chat-header">
+        <span>AI Chatbot</span>
+        <button id="close-chat">&times;</button>
+    </div>
+    <div id="chat-messages"></div>
+    <div id="chat-input-container">
+        <input type="text" id="chat-input" placeholder="Ask me anything...">
+        <button id="send-btn"><i class="bi bi-send"></i></button>
+    </div>
+</div>
+
+
+
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const sections = document.querySelectorAll(".section");
+        
+                function checkScroll() {
+                    sections.forEach((section) => {
+                        const sectionTop = section.getBoundingClientRect().top;
+                        const windowHeight = window.innerHeight;
+        
+                        if (sectionTop < windowHeight * 0.85) {
+                            section.classList.add("show");
+                        }
+                    });
+                }
+        
+                window.addEventListener("scroll", checkScroll);
+                checkScroll(); // Run once on page load
+            });
+        </script>
+        <script>
+        document.getElementById("chat-toggle").addEventListener("click", function() {
+            document.getElementById("chat-container").classList.toggle("hidden");
+            document.getElementById("chat-container").style.display = "flex";
+        });
+        
+        document.getElementById("close-chat").addEventListener("click", function() {
+            document.getElementById("chat-container").style.display = "none";
+        });
+        
+        document.getElementById("send-btn").addEventListener("click", function() {
+            const userMessage = document.getElementById("chat-input").value;
+            if (!userMessage.trim()) return;
+        
+            const chatMessages = document.getElementById("chat-messages");
+            chatMessages.innerHTML += `<div class="user-message">${userMessage}</div>`;
+        
+            fetch("http://127.0.0.1:5000/chat", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message: userMessage }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                chatMessages.innerHTML += `<div class="bot-message">${data.reply}</div>`;
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            });
+        
+            document.getElementById("chat-input").value = "";
+        });
+    </script>
         
     </body>
 </html>
