@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - EduCV</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="student-dashboard.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="images/EDULOGO2.png" class="logo-img" alt="EduCV Logo">
+            <span>EduCV</span>
+        </div>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>  
+        <ul class="nav-links" id="nav-links">
+            <li><a href="#" onclick="showSection('home')" class="active-link"><i class="bi bi-house-fill"></i> Home</a></li>
+            <li><a href="#" onclick="showSection('profile')"><i class="bi bi-person-fill"></i> Profile</a></li>
+            <li><a href="#" onclick="showSection('resume')"><i class="bi bi-file-earmark-text-fill"></i> Resume</a></li>
+            <li><a href="#" onclick="showSection('skills')"><i class="bi bi-lightning-fill"></i> Skills</a></li>
+            <li><a href="#" onclick="showSection('jobs')"><i class="bi bi-briefcase-fill"></i> Jobs</a></li>
+            <li><a href="#" onclick="showSection('settings')"><i class="bi bi-gear-fill"></i> Settings</a></li>
+            <li><a href="#" onclick="logout()"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+        </ul>
+    </nav>
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Home Section -->
+        <div id="home" class="content active">
+            <div class="greeting-card">
+                <div class="greeting-header">
+                    <div class="user-info">
+                        <img src="images/student-dashboard-home.jpg" alt="Profile Picture" class="profile-pic">
+                        <div>
+                            <h2>Welcome back, John Doe!</h2>
+                            <p>Computer Science Student</p>
+                        </div>
+                    </div>
+                    <div class="completion-status">
+                        <div class="progress-circle" data-progress="75">
+                            <span>75%</span>
+                        </div>
+                        <p>Profile Completion</p>
+                    </div>
+                </div>
+            </div>
+            <div class="dashboard-grid">
+                <div class="dashboard-card stats">
+                    <h3><i class="bi bi-graph-up"></i> Your Stats</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-number">12</span>
+                            <span class="stat-label">Skills Added</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">5</span>
+                            <span class="stat-label">Courses Completed</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">3</span>
+                            <span class="stat-label">Projects</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">8</span>
+                            <span class="stat-label">Applications</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="dashboard-card tasks">
+                    <h3><i class="bi bi-check2-square"></i> To-Do List</h3>
+                    <ul class="task-list">
+                        <li><input type="checkbox"> Complete resume summary</li>
+                        <li><input type="checkbox"> Add 2 more projects to portfolio</li>
+                        <li><input type="checkbox" checked> Update skills assessment</li>
+                        <li><input type="checkbox"> Apply to internship positions</li>
+                    </ul>
+                    <button class="add-task-btn"><i class="bi bi-plus-circle"></i> Add New Task</button>
+                </div>
+                <div class="dashboard-card notifications">
+                    <h3><i class="bi bi-bell-fill"></i> Notifications</h3>
+                    <ul class="notification-list">
+                        <li class="new">
+                            <span class="notification-time">1h ago</span>
+                            <span class="notification-text">Your resume was viewed by 3 companies</span>
+                        </li>
+                        <li class="new">
+                            <span class="notification-time">5h ago</span>
+                            <span class="notification-text">New job matching your skills: Frontend Developer</span>
+                        </li>
+                        <li>
+                            <span class="notification-time">1d ago</span>
+                            <span class="notification-text">Your AI-suggested resume updates are ready</span>
+                        </li>
+                        <li>
+                            <span class="notification-time">2d ago</span>
+                            <span class="notification-text">Course completion certificate ready</span>
+                        </li>
+                    </ul>
+                    <a href="#" class="view-all">View all notifications</a>
+                </div>
+                <div class="dashboard-card upcoming-events">
+                    <h3><i class="bi bi-calendar-event"></i> Upcoming Events</h3>
+                    <div class="event">
+                        <div class="event-date">
+                            <span class="month">APR</span>
+                            <span class="day">15</span>
+                        </div>
+                        <div class="event-details">
+                            <h4>Tech Career Fair</h4>
+                            <p><i class="bi bi-clock"></i> 10:00 AM - 4:00 PM</p>
+                            <p><i class="bi bi-geo-alt"></i> University Campus, Hall B</p>
+                        </div>
+                    </div>
+                    <div class="event">
+                        <div class="event-date">
+                            <span class="month">APR</span>
+                            <span class="day">22</span>
+                        </div>
+                        <div class="event-details">
+                            <h4>Resume Workshop</h4>
+                            <p><i class="bi bi-clock"></i> 2:00 PM - 3:30 PM</p>
+                            <p><i class="bi bi-geo-alt"></i> Virtual Event</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Profile Section -->
+        <div id="profile" class="content">
+            <h2><i class="bi bi-person-circle"></i> My Profile</h2>
+            <div class="profile-container">
+                <div class="profile-header">
+                    <div class="profile-image-container">
+                        <img src="images/student-dashboard-home.jpg" alt="Profile Picture">
+                        <button class="change-photo-btn"><i class="bi bi-camera"></i></button>
+                    </div>
+                    <div class="profile-title">
+                        <h3>John Doe</h3>
+                        <p>Computer Science Student</p>
+                        <p>University of Technology</p>
+                    </div>
+                </div>
+                <div class="profile-section">
+                    <h4>Personal Information</h4>
+                    <div class="edit-form">
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text" value="John Doe">
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" value="john.doe@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="tel" value="(555) 123-4567">
+                        </div>
+                        <div class="form-group">
+                            <label>Date of Birth</label>
+                            <input type="date" value="2000-01-15">
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-section">
+                    <h4>Academic Information</h4>
+                    <div class="edit-form">
+                        <div class="form-group">
+                            <label>University/Institution</label>
+                            <input type="text" value="University of Technology">
+                        </div>
+                        <div class="form-group">
+                            <label>Degree</label>
+                            <input type="text" value="Bachelor of Science">
+                        </div>
+                        <div class="form-group">
+                            <label>Major</label>
+                            <input type="text" value="Computer Science">
+                        </div>
+                        <div class="form-group">
+                            <label>Expected Graduation</label>
+                            <input type="month" value="2025-05">
+                        </div>
+                        <div class="form-group">
+                            <label>Current GPA</label>
+                            <input type="text" value="3.8">
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-section">
+                    <h4>About Me</h4>
+                    <div class="edit-form">
+                        <div class="form-group full-width">
+                            <textarea rows="4">Passionate computer science student with a focus on web development and artificial intelligence. Seeking internship opportunities to apply my knowledge and gain real-world experience.</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-actions">
+                    <button class="save-btn">Save Changes</button>
+                    <button class="cancel-btn">Cancel</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Resume Section -->
+        <div id="resume" class="content">
+            <h2><i class="bi bi-file-earmark-text-fill"></i> My Resume</h2>
+            <div class="resume-container">
+                <div class="resume-header">
+                    <div class="resume-title">
+                        <h3>Professional Resume</h3>
+                        <p>Last updated: March 28, 2025</p>
+                    </div>
+                    <div class="resume-actions">
+                        <button class="resume-action-btn download"><i class="bi bi-download"></i> Download PDF</button>
+                        <button class="resume-action-btn share"><i class="bi bi-share"></i> Share</button>
+                        <button class="resume-action-btn enhance"><i class="bi bi-magic"></i> AI Enhance</button>
+                    </div>
+                </div>
+                
+                <div class="resume-content">
+                    <div class="resume-section">
+                        <div class="section-header">
+                            <h4>Summary</h4>
+                            <button class="edit-btn"><i class="bi bi-pencil"></i></button>
+                        </div>
+                        <div class="editable-content">
+                            <p>Computer Science student at University of Technology with strong programming skills in Java, Python, and JavaScript. Passionate about web development and artificial intelligence. Seeking internship opportunities to apply academic knowledge in a real-world setting.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="resume-section">
+                        <div class="section-header">
+                            <h4>Education</h4>
+                            <button class="edit-btn"><i class="bi bi-pencil"></i></button>
+                        </div>
+                        <div class="editable-content">
+                            <div class="resume-item">
+                                <div class="item-header">
+                                    <h5>Bachelor of Science in Computer Science</h5>
+                                    <span class="date">2022 - Present</span>
+                                </div>
+                                <p class="institution">University of Technology</p>
+                                <p>GPA: 3.8/4.0</p>
+                                <p>Relevant Coursework: Data Structures, Algorithms, Database Systems, Web Development</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="resume-section">
+                        <div class="section-header">
+                            <h4>Technical Skills</h4>
+                            <button class="edit-btn"><i class="bi bi-pencil"></i></button>
+                        </div>
+                        <div class="editable-content">
+                            <div class="skills-grid">
+                                <div class="skill-category">
+                                    <h5>Programming Languages</h5>
+                                    <ul>
+                                        <li>Java</li>
+                                        <li>Python</li>
+                                        <li>JavaScript</li>
+                                        <li>HTML/CSS</li>
+                                        <li>SQL</li>
+                                    </ul>
+                                </div>
+                                <div class="skill-category">
+                                    <h5>Frameworks & Libraries</h5>
+                                    <ul>
+                                        <li>React.js</li>
+                                        <li>Node.js</li>
+                                        <li>Express</li>
+                                        <li>Bootstrap</li>
+                                    </ul>
+                                </div>
+                                <div class="skill-category">
+                                    <h5>Tools & Technologies</h5>
+                                    <ul>
+                                        <li>Git/GitHub</li>
+                                        <li>VS Code</li>
+                                        <li>MongoDB</li>
+                                        <li>Docker</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="resume-section">
+                        <div class="section-header">
+                            <h4>Projects</h4>
+                            <button class="edit-btn"><i class="bi bi-pencil"></i></button>
+                        </div>
+                        <div class="editable-content">
+                            <div class="resume-item">
+                                <div class="item-header">
+                                    <h5>E-Commerce Web Application</h5>
+                                    <span class="date">Jan 2025 - Mar 2025</span>
+                                </div>
+                                <p>Developed a full-stack e-commerce platform using React, Node.js, and MongoDB.</p>
+                                <ul class="project-details">
+                                    <li>Implemented user authentication and authorization</li>
+                                    <li>Created responsive UI with Bootstrap and custom CSS</li>
+                                    <li>Integrated payment processing with Stripe API</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="resume-item">
+                                <div class="item-header">
+                                    <h5>Weather Forecast App</h5>
+                                    <span class="date">Nov 2024 - Dec 2024</span>
+                                </div>
+                                <p>Built a weather application that uses OpenWeatherMap API to display current and forecasted weather conditions.</p>
+                                <ul class="project-details">
+                                    <li>Fetched and processed data from external APIs</li>
+                                    <li>Implemented geolocation for user's current location</li>
+                                    <li>Created interactive charts using Chart.js</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="resume-section">
+                        <div class="section-header">
+                            <h4>Experience</h4>
+                            <button class="add-btn"><i class="bi bi-plus-circle"></i> Add</button>
+                        </div>
+                        <div class="editable-content">
+                            <div class="empty-state">
+                                <i class="bi bi-briefcase"></i>
+                                <p>No experience added yet. Click "Add" to include your work experience.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="resume-section">
+                        <div class="section-header">
+                            <h4>Certifications</h4>
+                            <button class="edit-btn"><i class="bi bi-pencil"></i></button>
+                        </div>
+                        <div class="editable-content">
+                            <div class="resume-item">
+                                <div class="item-header">
+                                    <h5>Web Development Bootcamp</h5>
+                                    <span class="date">October 2024</span>
+                                </div>
+                                <p class="institution">Udemy</p>
+                            </div>
+                            <div class="resume-item">
+                                <div class="item-header">
+                                    <h5>Python Data Structures & Algorithms</h5>
+                                    <span class="date">August 2024</span>
+                                </div>
+                                <p class="institution">Coursera</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="resume-feedback">
+                    <div class="feedback-header">
+                        <h4>Resume Score: 85/100</h4>
+                        <p>Your resume is strong, but there's room for improvement!</p>
+                    </div>
+                    <div class="feedback-tips">
+                        <div class="tip">
+                            <i class="bi bi-exclamation-circle"></i>
+                            <p>Add 1-2 relevant work experiences to strengthen your profile</p>
+                        </div>
+                        <div class="tip">
+                            <i class="bi bi-info-circle"></i>
+                            <p>Consider adding more details to your project descriptions</p>
+                        </div>
+                        <div class="tip">
+                            <i class="bi bi-lightbulb"></i>
+                            <p>Use action verbs to start your achievement statements</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Skills Section -->
+        <div id="skills" class="content">
+            <h2><i class="bi bi-lightning-fill"></i> My Skills</h2>
+            <div class="skills-container">
+                <div class="skills-header">
+                    <div class="skills-overview">
+                        <div class="skills-stat">
+                            <span class="stat-number">12</span>
+                            <span class="stat-label">Total Skills</span>
+                        </div>
+                        <div class="skills-stat">
+                            <span class="stat-number">8</span>
+                            <span class="stat-label">Verified</span>
+                        </div>
+                        <div class="skills-stat">
+                            <span class="stat-number">4</span>
+                            <span class="stat-label">In Progress</span>
+                        </div>
+                    </div>
+                    <div class="skills-actions">
+                        <button class="skill-action-btn"><i class="bi bi-plus-circle"></i> Add Skill</button>
+                        <button class="skill-action-btn"><i class="bi bi-arrow-clockwise"></i> Take Assessment</button>
+                    </div>
+                </div>
+                
+                <div class="skills-content">
+                    <div class="filter-bar">
+                        <div class="filter-group">
+                            <label>Filter by:</label>
+                            <select class="filter-select">
+                                <option value="all">All Skills</option>
+                                <option value="verified">Verified Only</option>
+                                <option value="in-progress">In Progress</option>
+                            </select>
+                        </div>
+                        <div class="search-box">
+                            <i class="bi bi-search"></i>
+                            <input type="text" placeholder="Search skills...">
+                        </div>
+                    </div>
+                    
+                    <div class="skills-grid">
+                        <div class="skill-card verified">
+                            <div class="skill-header">
+                                <h4>JavaScript</h4>
+                                <span class="skill-badge">Verified</span>
+                            </div>
+                            <div class="skill-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 85%"></div>
+                                </div>
+                                <span class="progress-text">85%</span>
+                            </div>
+                            <div class="skill-info">
+                                <p>Last assessment: <span>March 15, 2025</span></p>
+                                <div class="skill-actions">
+                                    <button class="skill-btn"><i class="bi bi-pencil"></i></button>
+                                    <button class="skill-btn"><i class="bi bi-trash"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-card verified">
+                            <div class="skill-header">
+                                <h4>HTML/CSS</h4>
+                                <span class="skill-badge">Verified</span>
+                            </div>
+                            <div class="skill-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 92%"></div>
+                                </div>
+                                <span class="progress-text">92%</span>
+                            </div>
+                            <div class="skill-info">
+                                <p>Last assessment: <span>March 10, 2025</span></p>
+                                <div class="skill-actions">
+                                    <button class="skill-btn"><i class="bi bi-pencil"></i></button>
+                                    <button class="skill-btn"><i class="bi bi-trash"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-card verified">
+                            <div class="skill-header">
+                                <h4>React.js</h4>
+                                <span class="skill-badge">Verified</span>
+                            </div>
+                            <div class="skill-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 78%"></div>
+                                </div>
+                                <span class="progress-text">78%</span>
+                            </div>
+                            <div class="skill-info">
+                                <p>Last assessment: <span>March 18, 2025</span></p>
+                                <div class="skill-actions">
+                                    <button class="skill-btn"><i class="bi bi-pencil"></i></button>
+                                    <button class="skill-btn"><i class="bi bi-trash"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-card in-progress">
+                            <div class="skill-header">
+                                <h4>Node.js</h4>
+                                <span class="skill-badge progress">In Progress</span>
+                            </div>
+                            <div class="skill-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 65%"></div>
+                                </div>
+                                <span class="progress-text">65%</span>
+                            </div>
+                            <div class="skill-info">
+                                <p>Complete assessment to verify</p>
+                                <div class="skill-actions">
+                                    <button class="skill-btn verify"><i class="bi bi-check2-circle"></i> Verify</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-card verified">
+                            <div class="skill-header">
+                                <h4>Python</h4>
+                                <span class="skill-badge">Verified</span>
+                            </div>
+                            <div class="skill-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 80%"></div>
+                                </div>
+                                <span class="progress-text">80%</span>
+                            </div>
+                            <div class="skill-info">
+                                <p>Last assessment: <span>February 25, 2025</span></p>
+                                <div class="skill-actions">
+                                    <button class="skill-btn"><i class="bi bi-pencil"></i></button>
+                                    <button class="skill-btn"><i class="bi bi-trash"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-card verified">
+                            <div class="skill-header">
+                                <h4>SQL</h4>
+                                <span class="skill-badge">Verified</span>
+                            </div>
+                            <div class="skill-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 75%"></div>
+                                </div>
+                                <span class="progress-text">75%</span>
+                            </div>
+                            <div class="skill-info">
+                                <p>Last assessment: <span>March 5, 2025</span></p>
+                                <div class="skill-actions">
+                                    <button class="skill-btn"><i class="bi bi-pencil"></i></button>
+                                    <button class="skill-btn"><i class="bi bi-trash"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="recommended-skills">
+                        <h4>Recommended Skills for You</h4>
+                        <p>Based on your profile and job market trends</p>
+                        
+                        <div class="recommended-skills-list">
+                            <div class="recommended-skill">
+                                <div class="skill-info">
+                                    <h5>TypeScript</h5>
+                                    <p>Strongly typed programming language that builds on JavaScript</p>
+                                </div>
+                                <button class="add-btn"><i class="bi bi-plus"></i> Add</button>
+                            </div>
+                            
+                            <div class="recommended-skill">
+                                <div class="skill-info">
+                                    <h5>Vue.js</h5>
+                                    <p>Progressive JavaScript framework for building user interfaces</p>
+                                </div>
+                                <button class="add-btn"><i class="bi bi-plus"></i> Add</button>
+                            </div>
+                            
+                            <div class="recommended-skill">
+                                <div class="skill-info">
+                                    <h5>AWS</h5>
+                                    <p>Cloud computing platform by Amazon</p>
+                                </div>
+                                <button class="add-btn"><i class="bi bi-plus"></i> Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Jobs Section -->
+        <div id="jobs" class="content">
+            <h2><i class="bi bi-briefcase-fill"></i> Job Opportunities</h2>
+            <div class="jobs-container">
+                <div class="jobs-search-bar">
+                    <div class="search-input">
+                        <i class="bi bi-search"></i>
+                        <input type="text" placeholder="Search job titles, companies, skills...">
+                    </div>
+                    <div class="filter-options">
+                        <select class="job-filter">
+                            <option value="">All Job Types</option>
+                            <option value="full-time">Full-time</option>
+                            <option value="part-time">Part-time</option>
+                            <option value="internship">Internship</option>
+                            <option value="contract">Contract</option>
+                        </select>
+                        <select class="job-filter">
+                            <option value="">All Locations</option>
+                            <option value="remote">Remote</option>
+                            <option value="onsite">On-site</option>
+                            <option value="hybrid">Hybrid</option>
+                        </select>
+                        <button class="search-btn">Search</button>
+                        <button class="filter-btn"><i class="bi bi-sliders"></i> More Filters</button>
+                    </div>
+                </div>
+                
+                <div class="jobs-content">
+                    <div class="jobs-list">
+                        <div class="job-card">
+                            <div class="job-card-header">
+                                <div class="company-logo">
+                                    <span>TS</span>
+                                </div>
+                                <div class="job-details">
+                                    <h4>Frontend Developer Intern</h4>
+                                    <p class="company-name">Tech Solutions Inc.</p>
+                                    <div class="job-meta">
+                                        <span class="job-type">Internship</span>
+                                        <span class="job-location"><i class="bi bi-geo-alt"></i> Remote</span>
+                                        <span class="job-salary"><i class="bi bi-cash"></i> $20-25/hr</span>
+                                    </div>
+                                </div>
+                                <div class="job-match">
+                                    <div class="match-badge">
+                                        <span>85%</span>
+                                        <p>Match</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-card-body">
+                                <div class="job-tags">
+                                    <span class="job-tag">React.js</span>
+                                    <span class="job-tag">JavaScript</span>
+                                    <span class="job-tag">HTML/CSS</span>
+                                    <span class="job-tag">UI/UX</span>
+                                </div>
+                                <p class="job-description">
+                                    Join our team as a Frontend Developer Intern to build responsive and user-friendly web applications. Work with experienced developers and contribute to real projects.
+                                </p>
+                            </div>
+                            <div class="job-card-footer">
+                                <span class="job-posted">Posted 2 days ago</span>
+                                <div class="job-actions">
+                                    <button class="job-action-btn save"><i class="bi bi-bookmark"></i></button>
+                                    <button class="job-action-btn apply">Apply Now</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="job-card">
+                            <div class="job-card-header">
+                                <div class="company-logo">
+                                    <span>DT</span>
+                                </div>
+                                <div class="job-details">
+                                    <h4>Junior Web Developer</h4>
+                                    <p class="company-name">Digital Trends</p>
+                                    <div class="job-meta">
+                                        <span class="job-type">Full-time</span>
+                                        <span class="job-location"><i class="bi bi-geo-alt"></i> New York, NY (Hybrid)</span>
+                                        <span class="job-salary"><i class="bi bi-cash"></i> $70-80K/year</span>
+                                    </div>
+                                </div>
+                                <div class="job-match">
+                                    <div class="match-badge">
+                                        <span>78%</span>
+                                        <p>Match</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-card-body">
+                                <div class="job-tags">
+                                    <span class="job-tag">JavaScript</span>
+                                    <span class="job-tag">Node.js</span>
+                                    <span class="job-tag">MongoDB</span>
+                                    <span class="job-tag">Express</span>
+                                </div>
+                                <p class="job-description">
+                                    We're looking for a Junior Web Developer to join our growing team. The ideal candidate has experience with modern JavaScript frameworks and building full-stack applications.
+                                </p>
+                            </div>
+                            <div class="job-card-footer">
+                                <span class="job-posted">Posted 1 week ago</span>
+                                <div class="job-actions">
+                                    <button class="job-action-btn save"><i class="bi bi-bookmark-fill"></i></button>
+                                    <button class="job-action-btn apply">Apply Now</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="job-card">
+                            <div class="job-card-header">
+                                <div class="company-logo">
+                                    <span>CS</span>
+                                </div>
+                                <div class="job-details">
+                                    <h4>Software Engineer Intern</h4>
+                                    <p class="company-name">Cloud Services Co.</p>
+                                    <div class="job-meta">
+                                        <span class="job-type">Internship</span>
+                                        <span class="job-location"><i class="bi bi-geo-alt"></i> San Francisco, CA</span>
+                                        <span class="job-salary"><i class="bi bi-cash"></i> $25-30/hr</span>
+                                    </div>
+                                </div>
+                                <div class="job-match">
+                                    <div class="match-badge">
+                                        <span>92%</span>
+                                        <p>Match</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-card-body">
+                                <div class="job-tags">
+                                    <span class="job-tag">Python</span>
+                                    <span class="job-tag">AWS</span>
+                                    <span class="job-tag">Docker</span>
+                                    <span class="job-tag">Microservices</span>
+                                </div>
+                                <p class="job-description">
+                                    Summer internship opportunity for Computer Science students. Gain hands-on experience with cloud technologies and contribute to scalable software solutions.
+                                </p>
+                            </div>
+                            <div class="job-card-footer">
+                                <span class="job-posted">Posted 3 days ago</span>
+                                <div class="job-actions">
+                                    <button class="job-action-btn save"><i class="bi bi-bookmark"></i></button>
+                                    <button class="job-action-btn apply">Apply Now</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="job-applications">
+                        <h3>Your Applications</h3>
+                        <div class="applications-list">
+                            <div class="application-item">
+                                <div class="application-icon">
+                                    <span>TS</span>
+                                </div>
+                                <div class="application-details">
+                                    <h5>Frontend Developer Intern</h5>
+                                    <p>Tech Solutions Inc.</p>
+                                    <span class="application-status applied">Applied</span>
+                                </div>
+                                <div class="application-date">
+                                    <p>Apr 12, 2025</p>
+                                    <a href="#" class="view-application">View</a>
+                                </div>
+                            </div>
+                            
+                            <div class="application-item">
+                                <div class="application-icon">
+                                    <span>DT</span>
+                                </div>
+                                <div class="application-details">
+                                    <h5>Junior Web Developer</h5>
+                                    <p>Digital Trends</p>
+                                    <span class="application-status interview">Interview</span>
+                                </div>
+                                <div class="application-date">
+                                    <p>Apr 8, 2025</p>
+                                    <a href="#" class="view-application">View</a>
+                                </div>
+                            </div>
+                            
+                            <div class="application-item">
+                                <div class="application-icon">
+                                    <span>IP</span>
+                                </div>
+                                <div class="application-details">
+                                    <h5>Software Engineering Intern</h5>
+                                    <p>Innovation Plus</p>
+                                    <span class="application-status rejected">Rejected</span>
+                                </div>
+                                <div class="application-date">
+                                    <p>Mar 28, 2025</p>
+                                    <a href="#" class="view-application">View</a>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#" class="view-all-applications">View All Applications</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Settings Section -->
+        <div id="settings" class="content">
+            <h2><i class="bi bi-gear-fill"></i> Settings</h2>
+            <div class="settings-container">
+                <div class="settings-sidebar">
+                    <ul class="settings-nav">
+                        <li class="active">Account</li>
+                        <li>Notifications</li>
+                        <li>Privacy</li>
+                        <li>Preferences</li>
+                        <li>Connected Accounts</li>
+                        <li>Billing</li>
+                    </ul>
+                </div>
+                
+                <div class="settings-content">
+                    <div class="settings-header">
+                        <h3>Account Settings</h3>
+                        <p>Manage your account information and settings</p>
+                    </div>
+                    
+                    <div class="settings-section">
+                        <h4>Email Address</h4>
+                        <div class="settings-item">
+                            <p>Your current email is <strong>john.doe@example.com</strong></p>
+                            <button class="settings-btn">Change Email</button>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-section">
+                        <h4>Password</h4>
+                        <div class="settings-item">
+                            <p>Last changed: January 15, 2025</p>
+                            <button class="settings-btn">Change Password</button>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-section">
+                        <h4>Two-Factor Authentication</h4>
+                        <div class="settings-item">
+                            <div class="settings-info">
+                                <p>Add an extra layer of security to your account</p>
+                                <span class="status-badge disabled">Disabled</span>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-section">
+                        <h4>Profile Visibility</h4>
+                        <div class="settings-item">
+                            <div class="settings-info">
+                                <p>Allow companies to view your profile</p>
+                                <span class="status-badge enabled">Enabled</span>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-section">
+                        <h4>Language</h4>
+                        <div class="settings-item">
+                            <select class="settings-select">
+                                <option value="en">English</option>
+                                <option value="es">Spanish</option>
+                                <option value="fr">French</option>
+                                <option value="de">German</option>
+                                <option value="zh">Chinese</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-section">
+                        <h4>Danger Zone</h4>
+                        <div class="settings-item danger">
+                            <div class="settings-info">
+                                <p>Deactivate your account</p>
+                                <span class="warning-text">This action cannot be undone</span>
+                            </div>
+                            <button class="danger-btn">Deactivate Account</button>
+                        </div>
+                    </div>
+                    
+                    <div class="settings-actions">
+                        <button class="save-settings-btn">Save Changes</button>
+                        <button class="cancel-settings-btn">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Set active link
+        function setActiveLink(element) {
+            // Remove active class from all links
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active-link');
+            });
+            
+            // Add active class to clicked link
+            element.classList.add('active-link');
+        }
+        
+        function toggleMenu() {
+            document.querySelector(".nav-links").classList.toggle("active");
+        }
+        
+        function showSection(section) {
+            // Hide all content sections
+            document.querySelectorAll('.content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Show the selected section
+            document.getElementById(section).classList.add('active');
+            
+            // Set active link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                if (link.getAttribute('onclick').includes(section)) {
+                    setActiveLink(link);
+                }
+            });
+            
+            // Close mobile menu if open
+            if (window.innerWidth <= 768) {
+                document.querySelector(".nav-links").classList.remove("active");
+            }
+        }
+        
+        function logout() {
+            if (confirm("Are you sure you want to log out?")) {
+                alert("You have been logged out!");
+                window.location.href = "student-login.html";
+            }
+        }
+        
+        // Add event listeners on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Settings tabs navigation
+            const settingsTabs = document.querySelectorAll('.settings-nav li');
+            settingsTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    settingsTabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    // In a real app, you would show the corresponding content here
+                });
+            });
+            
+            // Toggle switches
+            const toggleSwitches = document.querySelectorAll('.toggle-switch input');
+            toggleSwitches.forEach(toggle => {
+                toggle.addEventListener('change', function() {
+                    const statusBadge = this.closest('.settings-item').querySelector('.status-badge');
+                    if (this.checked) {
+                        statusBadge.textContent = 'Enabled';
+                        statusBadge.className = 'status-badge enabled';
+                    } else {
+                        statusBadge.textContent = 'Disabled';
+                        statusBadge.className = 'status-badge disabled';
+                    }
+                });
+            });
+            
+            // For resume edit buttons
+            const editButtons = document.querySelectorAll('.edit-btn');
+            editButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const contentSection = this.closest('.resume-section').querySelector('.editable-content');
+                    // In a real app, you would make the content editable here
+                    alert('Edit mode will be enabled in the full version');
+                });
+            });
+            
+            // For job bookmark buttons
+            const saveButtons = document.querySelectorAll('.job-action-btn.save');
+            saveButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const icon = this.querySelector('i');
+                    if (icon.classList.contains('bi-bookmark')) {
+                        icon.classList.remove('bi-bookmark');
+                        icon.classList.add('bi-bookmark-fill');
+                    } else {
+                        icon.classList.remove('bi-bookmark-fill');
+                        icon.classList.add('bi-bookmark');
+                    }
+                });
+            });
+            
+            // For apply now buttons
+            const applyButtons = document.querySelectorAll('.job-action-btn.apply');
+            applyButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const jobTitle = this.closest('.job-card').querySelector('h4').textContent;
+                    alert(`You're about to apply for: ${jobTitle}`);
+                    // In a real app, you would open an application form
+                });
+            });
+        });
+    </script>
+</body>
+</html>
